@@ -1,6 +1,6 @@
 class LocalStorageUtils {
-    set(tokenFromAPI) {
-      localStorage.setItem("token", JSON.stringify(tokenFromAPI));
+    set(dataFromAPI) {
+      localStorage.setItem("token", JSON.stringify(dataFromAPI));
     }
   
     get() {
