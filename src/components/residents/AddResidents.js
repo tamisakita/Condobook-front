@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import { Formik } from 'formik';
 
@@ -45,12 +46,13 @@ const tailFormItemLayout = {
   },
 };
 
-const AddResidents = () => {
-  const [form] = Form.useForm();
+const AddResidents = (props) => {
+  const [isRegisterSuccessfull, setRegisterSuccessfull] = useState(false)
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
+  console.log(isRegisterSuccessfull)
+  console.log(setRegisterSuccessfull)
+
+  const [form] = Form.useForm();
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -72,73 +74,86 @@ const AddResidents = () => {
     phone: '',
   }
 
-  const handleSubmitMethod = () => {
-    console.log('formulario submetido!!!')
+  const redirectToLogin = () => {
+    setTimeout(() => {
+      props.history.push('/login');
+    }, 2000)
+  }
+
+  const handleSubmitMethod = async (formValues, helperMethods) => {
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/residents/private/register`,
+        formValues,
+      );
+
+      setRegisterSuccessfull(true)
+
+      redirectToLogin()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <div>
+      {isRegisterSuccessfull && <h2>Cadastro realizado com sucesso</h2>}
+
       <h1>ADD RESIDENTS</h1>
       <Formik
         initialValues={initialState}
         onSubmit={handleSubmitMethod}
+        validator={() => ({})}
       >
         
         {(props) => (
           <Form 
-          onSubmit={props.handleSubmit}
+          onFinish={props.handleSubmit}
           {...formItemLayout}
           form={form}
           name="register"
-          onFinish={onFinish}
-          initialValues={{
-            prefix: '11',
-          }}
           scrollToFirstError
           >
+
+          {/* {console.log(props.values)} */}
 
           <Form.Item
             name="fullName"
             label="Full Name"
-            value={props.values.fullName}
-            onChange={props.handleChange}
             rules={[
-              {
-                type: 'fullName',
-                message: 'The input is not valid name!',
-              },
+              // {
+              //   type: 'fullName',
+              //   message: 'The input is not valid name!',
+              // },
               {
                 required: true,
                 message: 'Please input your name!',
               },
             ]}
           >
-            <Input />
+            <Input name="fullName" value={props.values.fullName} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item
             name="email"
             label="E-mail"
-            value={props.values.email}
-            onChange={props.handleChange}
             rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
+              // {
+              //   type: 'email',
+              //   message: 'The input is not valid E-mail!',
+              // },
               {
                 required: true,
                 message: 'Please input your E-mail!',
               },
             ]}
           >
-            <Input />
+            <Input name="email" value={props.values.email} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item
             name="password"
             label="Password"
-            value={props.values.password}
             rules={[
               {
                 required: true,
@@ -147,7 +162,7 @@ const AddResidents = () => {
             ]}
             hasFeedback
           >
-            <Input.Password />
+            <Input.Password name="password" value={props.values.password} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item
@@ -171,13 +186,11 @@ const AddResidents = () => {
               }),
             ]}
           >
-            <Input.Password />
+            <Input.Password/>
           </Form.Item>
 
           <Form.Item
             name="apartment"
-            value={props.values.apartment}
-            onChange={props.handleChange}
             label={
               <span>
                 Apartment
@@ -193,17 +206,16 @@ const AddResidents = () => {
               },
             ]}
           >
-            <Input />
+            <Input name="apartment" value={props.values.apartment} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item
             name="phone"
             label="Phone Number"
-            value={props.values.phone}
-            onChange={props.handleChange}
+            
             rules={[
               {
-                required: true,
+                // required: true,
                 message: 'Please input your phone number!',
               },
             ]}
@@ -213,11 +225,14 @@ const AddResidents = () => {
               style={{
                 width: '100%',
               }}
+              name="phone"
+              value={props.values.phone}
+              onChange={props.handleChange}
             />
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button htmlType="submit">
               Register
             </Button>
           </Form.Item>
