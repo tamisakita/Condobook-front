@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import { Formik } from 'formik';
+
+import ApiServices from '../../services/api.service';
 
 import {
   Form,
@@ -80,12 +81,9 @@ const AddResidents = (props) => {
     }, 2000)
   }
 
-  const handleSubmitMethod = async (formValues, helperMethods) => {
+  const handleSubmitMethod = async (data, helperMethods) => {
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/residents/private/register`,
-        formValues,
-      );
+      await ApiServices.addResidents(data);
 
       setRegisterSuccessfull(true)
 

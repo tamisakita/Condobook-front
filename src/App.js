@@ -10,7 +10,6 @@ import DashboardResident from './components/dashboard-resident/DashboardResident
 
 import localStorageUtils from './utils/localStorage.utils';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -31,7 +30,10 @@ class App extends Component {
     const data = localStorageUtils.get();
 
     if (data) {
+      // eslint-disable-next-line
       this.state.isUserAuthenticated = true;
+      // eslint-disable-next-line
+      this.state.role = data.role;
     }
   }
 
