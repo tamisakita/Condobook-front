@@ -38,9 +38,18 @@ class ApiServices {
     await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/residents/private/register`, data);
   }
 
+<<<<<<< HEAD
+  getAllResidents = async () => {
+    const { data } = await this.api.get(`${process.env.REACT_APP_API_BASE_URL}/residents/private/list`);
+
+    return data;
+  }
+
+=======
   addRoom = async data => {
     await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/rooms/private/create`, data);
   }
+>>>>>>> 2c3b53c7b52bd7d485b9b7944e3819ebd959324e
 }
 
 

@@ -4,3 +4,37 @@
   list-style: none;
   box-sizing: border-box;
 }
+
+.dashboard-sindico {
+  padding-top: 150px;
+}
+
+.dashboard-sindico-box-1 {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  border-radius: 10px;
+  padding: 50px 10px;
+  background-color: #8481E2;
+  color: white;
+}
+
+.dashboard-sindico-box-2 {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  border-radius: 10px;
+  padding: 50px 10px;
+  background-color: #52C41A;
+  color: white;
+}
+
+.dashboard-sindico-box-3 {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  border-radius: 10px;
+  padding: 50px 10px;
+  background-color: #FFC144;
+  color: white;
+}
