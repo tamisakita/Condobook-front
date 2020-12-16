@@ -101,12 +101,12 @@ const AddResidents = (props) => {
       <Formik
         initialValues={initialState}
         onSubmit={handleSubmitMethod}
-        validator={() => ({})}
+        validator={() => ({})} //está assim porque estamos usando validação do ant design
       >
         
         {(props) => (
           <Form 
-          onFinish={props.handleSubmit}
+          onFinish={props.handleSubmit} //equivale a onSubmit
           {...formItemLayout}
           form={form}
           name="register"

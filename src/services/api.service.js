@@ -37,7 +37,12 @@ class ApiServices {
   addResidents = async data => {
     await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/residents/private/register`, data);
   }
+
+  addRoom = async data => {
+    await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/rooms/private/create`, data);
+  }
 }
+
 
 
 export default new ApiServices();
