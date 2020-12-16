@@ -97,7 +97,7 @@ const AddResidents = (props) => {
     <div>
       {isRegisterSuccessfull && <h2>Cadastro realizado com sucesso</h2>}
 
-      <h1>ADD RESIDENTS</h1>
+      <h1>Registrar Morador</h1>
       <Formik
         initialValues={initialState}
         onSubmit={handleSubmitMethod}

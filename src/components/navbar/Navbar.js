@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
-const { Header, Sider, Content } = Layout;
+import { Layout, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
+
+const { Header } = Layout;
 
 class Navbar extends Component {
   state = {
@@ -23,50 +19,61 @@ class Navbar extends Component {
   };
 
   render() {
+    const menu = (
+      <Menu>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            Academia
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+            Salão de Festas
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            Brinquedoteca
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
+
     return (
       <nav>
         <ul>
         {this.props.isUserAuth ? (
           this.props.role === "sindico" ? 
           <>
-            <li>Espaço do Sindico!!!</li>
+            <Layout className="layout">
+              <Header>
+                <div className="logo" />
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                  <Menu.Item key="1"><Link to={"/dashboard"}>CONDOBOOK</Link></Menu.Item>
+                  <Menu.Item key="1"><Link to={`/list-residents`}>Condôminos</Link></Menu.Item>
+                  <Menu.Item key="1">Dependências</Menu.Item>
+                  <Menu.Item key="1">Agendamentos</Menu.Item>
+                  <Menu.Item key="1"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
+                </Menu>
+              </Header>
+            </Layout>      
           </> : 
           <>
-            <li>Espaço do Morador!!!</li>
-            <Layout>
-              <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-                <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                  <Menu.Item key="1" icon={<UserOutlined />}>
-                    nav 1
-                  </Menu.Item>
-                  <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                    nav 2
-                  </Menu.Item>
-                  <Menu.Item key="3" icon={<UploadOutlined />}>
-                    nav 3
-                  </Menu.Item>
-                </Menu>
-              </Sider>
-              <Layout className="site-layout">
-                <Header className="site-layout-background" style={{ padding: 0 }}>
-                  {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                    className: 'trigger',
-                    onClick: this.toggle,
-                  })}
+            <Layout className="layout">
+                <Header>
+                  <div className="logo" />
+                  <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                  <Menu.Item key="1"><Link to={"/dashboard-resident"}>CONDOBOOK</Link></Menu.Item>
+                    <Menu.Item key="1">Meus Agendamentos</Menu.Item>
+                    <Dropdown overlay={menu}>
+                      <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        Dependências <DownOutlined />
+                      </a>
+                    </Dropdown>
+                    <Menu.Item key="1"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
+                  </Menu>
                 </Header>
-                <Content
-                  className="site-layout-background"
-                  style={{
-                    margin: '24px 16px',
-                    padding: 24,
-                    minHeight: 280,
-                  }}
-                >
-                  Content
-                </Content>
-              </Layout>
-            </Layout>
+              </Layout>     
           </>
         ) : (
           <>
