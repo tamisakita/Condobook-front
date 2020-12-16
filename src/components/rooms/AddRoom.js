@@ -45,9 +45,9 @@ import {
   
     return (
       <div>
-        {isCreationSucessfull && <h2>Cadastro realizado com sucesso</h2>}
+        {isCreationSucessfull && <h2>Cadastro da dependencia realizado com sucesso</h2>}
 
-        <h1>Adicione uma sala</h1>
+        <h1>Adicione uma dependencia</h1>
         <Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}
@@ -63,8 +63,6 @@ import {
             span: 14,
           }}
           layout="horizontal"
-          initialValues={{
-          }}
           onFinish={props.handleSubmit}
         >
 
@@ -73,12 +71,12 @@ import {
           </Form.Item>
 
           
-          <Form.Item label="InputNumber">
-            <InputNumber />
+          <Form.Item label="Capacidade de Pessoas">
+            <InputNumber name="Capacidade" value={props.values.capacity} onChange={props.handleChange} />
           </Form.Item>
 
-          <Form.Item label="Nome da Dependencia">
-            <Input name="Nome da Dependencia" value={props.values.name} onChange={props.handleChange}/>
+          <Form.Item label="Descrição">
+            <Input name="Descrição" value={props.values.description} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item>
