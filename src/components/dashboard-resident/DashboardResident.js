@@ -8,23 +8,15 @@ import { TeamOutlined, HomeOutlined, CarryOutOutlined } from '@ant-design/icons'
 const DashboardResident = () => {
   return (
     <div className="dashboard-sindico">
-      <Row>
-        <Col className="dashboard-sindico-box-1" xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+        <div className="dashboard-sindico-box-1" xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
           <Avatar size={64} icon={<TeamOutlined />} />
-          <a><Link className="color-ancor" to={"/list-residents"}>Condôminos</Link></a>
-        </Col>
+          <a><Link className="color-ancor" to={"/list-residents"}>Meus agendamentos</Link></a>
+        </div>
 
-
-        <Col className="dashboard-sindico-box-2" xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-          <Avatar size={64} icon={<HomeOutlined />} />
-          <a><Link className="color-ancor" to={"/list-residents"}>Dependências</Link></a>
-        </Col>
-
-        <Col className="dashboard-sindico-box-3" xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+        <div className="dashboard-sindico-box-3" xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
           <Avatar size={64} icon={<CarryOutOutlined />} />
-          <a><Link className="color-ancor" to={"/list-residents"}>Agendamentos</Link></a>
-        </Col>
-      </Row>
+          <a><Link className="color-ancor" to={"/list-residents"}>Dependências</Link></a>
+        </div>
     </div>
   )
 }
