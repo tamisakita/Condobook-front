@@ -9,6 +9,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import DashboardResident from './components/dashboard-resident/DashboardResident';
 import ResidentsList from './components/residents/ResidentsList';
 import AddRoom from './components/rooms/AddRoom';
+import RoomList from './components/rooms/RoomList';
 
 import localStorageUtils from './utils/localStorage.utils';
 
@@ -67,6 +68,7 @@ class App extends Component {
           {isUserAuthenticated ? <Route exact path="/dashboard-resident" component={DashboardResident} /> : <Redirect to="/login" />}
           {isUserAuthenticated ? <Route exact path="/list-residents" component={ResidentsList} /> : <Redirect to="/dashboard" />}
           {isUserAuthenticated ? <Route exact path="/create-room" component={AddRoom} /> : <Redirect to="/dashboard" />}
+          {isUserAuthenticated ? <Route exact path="/list-room" component={RoomList} /> : <Redirect to="/dashboard" />}
         </Switch>
       </div>
     );

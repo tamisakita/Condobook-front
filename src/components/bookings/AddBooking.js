@@ -1,48 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-import apiServices from '../../services/api.service';
- 
-class AddBooking extends Component {
-    state = {
-      room: "",
-      bookingstart: "",
-    }
-     
-    handleFormSubmit = async (event) => {
-      try {
-        event.preventDefault();
-  
-        const { room, bookingstart } = this.state;
-  
-        await apiServices.createbooking({ room, bookingstart });
-  
-        this.props.getData();
-        
-        this.setState({ room: "", bookingstart: "" });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-   
-    handleChange = (event) => {  
-        const {name, value} = event.target;
-        this.setState({[name]: value});
-    }
-   
-    render(){
-      return(
-        <div>
-          <form onSubmit={this.handleFormSubmit}>
-            <label>Title:</label>
-            <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
-            <label>Description:</label>
-            <textarea name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
-            
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-      )
-    }
-  }
-   
-  export default AddBooking;
+import { Formik } from 'formik';
+
+import ApiServices from '../../services/api.service';
+import { Form, Input, InputNumber, Button } from 'antd';
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    email: '${label} is not a valid email!',
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
+
+const Demo = () => {
+  const onFinish = values => {
+    console.log(values);
+  };
+
+  return (
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email' }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'age']} label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
+        <InputNumber />
+      </Form.Item>
+      <Form.Item name={['user', 'website']} label="Website">
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'introduction']} label="Introduction">
+        <Input.TextArea />
+      </Form.Item>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+};
