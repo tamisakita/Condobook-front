@@ -39,11 +39,26 @@ class Navbar extends Component {
       </Menu>
     );
 
+    console.log(this.props.isUserAuth)
+
     return (
       <nav>
         <ul>
-        {this.props.isUserAuth ? (
-          this.props.role === "sindico" ? 
+        {!this.props.isUserAuth &&
+
+          <>
+            <Layout className="layout">
+              <Header>
+                <div className="logo" />
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                  <Menu.Item key="1">CONDOBOOK</Menu.Item>
+                </Menu>
+              </Header>
+            </Layout>          
+          </>
+        } 
+
+        {this.props.role === "sindico" &&
           <>
             <Layout className="layout">
               <Header>
@@ -57,7 +72,10 @@ class Navbar extends Component {
                 </Menu>
               </Header>
             </Layout>      
-          </> : 
+          </> 
+        }
+
+        {this.props.role === "resident" &&
           <>
             <Layout className="layout">
                 <Header>
@@ -75,19 +93,7 @@ class Navbar extends Component {
                 </Header>
               </Layout>     
           </>
-        ) : (
-          <>
-            <Layout className="layout">
-              <Header>
-                <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                  <Menu.Item key="1">CONDOBOOK</Menu.Item>
-                </Menu>
-              </Header>
-            </Layout>          
-          </>
-        )}
-          
+        }
         </ul>
       </nav>
     )

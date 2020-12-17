@@ -43,10 +43,12 @@ class App extends Component {
     this.setState({ isUserAuthenticated: status });
   }
 
-  logoutUser = () => {
-    localStorageUtils.delete();
+  logoutUser = async () => {
+    await localStorageUtils.delete();
 
     this.changeUserAuthStatus(false);
+
+    this.setState({ role: '' })
   }
 
   render() {
