@@ -33,7 +33,7 @@ import {
       
       const handleSubmitMethod = async (data, helperMethods) => {
         try {
-          await ApiServices.addRooms(data);
+          await ApiServices.addRoom(data);
     
           setCreationSuccessfull(true)
     
@@ -71,11 +71,15 @@ import {
           </Form.Item>
 
           
-          <Form.Item label="Capacidade de Pessoas">
-            <InputNumber name="Capacidade" value={props.values.capacity} onChange={props.handleChange} />
+          <Form.Item 
+          name = "Capacidade"
+          label="Capacidade de Pessoas">
+            <InputNumber name="Capacidade" value={props.values.capacity} onChange={props.handleChange} rules={[{ type: 'number', min: 0, max: 99 }]}/>
           </Form.Item>
 
-          <Form.Item label="Descrição">
+          <Form.Item 
+          name ="Descrição"
+          label="Descrição">
             <Input name="Descrição" value={props.values.description} onChange={props.handleChange}/>
           </Form.Item>
 
