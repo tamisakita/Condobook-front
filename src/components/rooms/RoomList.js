@@ -2,19 +2,9 @@ import React from 'react';
 import apiService from '../../services/api.service';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Table, Button } from 'antd';
 
-const columns = [
-    { title: 'Nome da Dependência', dataIndex: 'name', key: 'name' },
-    { title: 'Capacidade de Pessoas', dataIndex: 'capacity', key: 'capacity' },
-    { title: 'Descrição', dataIndex: 'description', key: 'description' },
-    {
-      title: '',
-      dataIndex: '',
-      key: 'x',
-      render: () => <a>Editar</a>
-    },
-  ];
 
 class RoomList extends Component {
     state = {
@@ -36,7 +26,31 @@ componentDidMount() {
     this.getAllRooms();
   }
 
+deleteRoom = async(id) => {
+  try{
+  await apiService.deleteRoombyId(id);
+
+  this.getAllRooms();
+  }catch(error){
+  console.log(error);
+  }
+}
+
 render() {
+  const columns = [
+    { title: 'Nome da Dependência', dataIndex: 'name', key: 'name' },
+    { title: 'Capacidade de Pessoas', dataIndex: 'capacity', key: 'capacity' },
+    { title: 'Descrição', dataIndex: 'description', key: 'description' },
+    {
+      title: '',
+      dataIndex: '',
+      key: 'x',
+      render: (roomId) => {
+        return <button onClick={() => this.deleteRoom(roomId)}>Delete</button>
+      }
+    },
+  ];
+
     const data = this.state.listOfRooms.map( rooms => {
         const dataObject = {
             name: rooms.name,
