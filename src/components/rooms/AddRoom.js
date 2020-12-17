@@ -66,7 +66,9 @@ import {
           onFinish={props.handleSubmit}
         >
 
-          <Form.Item label="Nome da Dependencia">
+          <Form.Item 
+          name="Nome da Dependencia"
+          label="Nome da Dependencia">
             <Input name="Nome da Dependencia" value={props.values.name} onChange={props.handleChange}/>
           </Form.Item>
 

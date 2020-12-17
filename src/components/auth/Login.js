@@ -46,62 +46,69 @@ const Login = (props) => {
 
   return (
     <div>
-      <h1>LOGINNN</h1>
-      <Formik
-        initialValues={initialState}
-        onSubmit={handleSubmitMethod}
-      >
-        {(props) => (
-          <Form
-          name="normal_login"
-          className="login-form"
-          onFinish={props.handleSubmit}
+      <div className="login-form">
+        <div>
+          <h1>LOGINNN</h1>
+        </div>
+        
+        <div>
+          <Formik
+            initialValues={initialState}
+            onSubmit={handleSubmitMethod}
           >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                message: 'Please input your Username!',
-              },
-            ]}
-          >
-            <Input 
-            prefix={<UserOutlined className="site-form-item-icon" />} 
-            placeholder="Email" 
-            name="email"
-            value={props.values.email} 
-            onChange={props.handleChange}
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Password!',
-              },
-            ]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={props.values.password} 
-              onChange={props.handleChange}
-            />
-          </Form.Item>
+            {(props) => (
+              <Form
+              name="normal_login"
+              className="login-form"
+              onFinish={props.handleSubmit}
+              >
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    message: 'Please input your Username!',
+                  },
+                ]}
+              >
+                <Input 
+                prefix={<UserOutlined className="site-form-item-icon" />} 
+                placeholder="Email" 
+                name="email"
+                value={props.values.email} 
+                onChange={props.handleChange}
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Password!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={props.values.password} 
+                  onChange={props.handleChange}
+                />
+              </Form.Item>
 
-          <Form.Item>
-            <Button htmlType="submit" className="login-form-button">
-              Log in
-            </Button>
-          </Form.Item>
-          </Form>
-        )}
+              <Form.Item>
+                <Button htmlType="submit" className="login-form-button">
+                  Log in
+                </Button>
+              </Form.Item>
+              </Form>
+            )}
 
-      </Formik>
- 
+          </Formik>
+        </div>
+      </div>
+
     </div>
   )
 }
