@@ -46,12 +46,13 @@ const Login = (props) => {
 
   return (
     <div>
-      <div className="login-form">
-        <div>
-          <h1>LOGINNN</h1>
+      <div className="login-box">
+        <div className="login-text">
+          <h2>A gestão das depências do seu prédio num só lugar!</h2>
+          <p>O Condobook é uma plataforma de gestão de agendamentos de dependências de condominios, uma maneira fácil de garantir que todos os condominos terão experiências seguras dentro de cada ambiente do prédio.</p>
         </div>
         
-        <div>
+        <div className="login-form">
           <Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}

@@ -75,9 +75,9 @@ const AddResidents = (props) => {
     phone: '',
   }
 
-  const redirectToLogin = () => {
+  const redirectToResidentsList = () => {
     setTimeout(() => {
-      props.history.push('/login');
+      props.history.push('/list-residents');
     }, 2000)
   }
 
@@ -87,7 +87,7 @@ const AddResidents = (props) => {
 
       setRegisterSuccessfull(true)
 
-      redirectToLogin()
+      redirectToResidentsList()
     } catch (error) {
       console.log(error)
     }
@@ -95,151 +95,151 @@ const AddResidents = (props) => {
 
   return (
     <div>
-      {isRegisterSuccessfull && <h2>Cadastro realizado com sucesso</h2>}
+      {isRegisterSuccessfull && <h1>Cadastro realizado com sucesso</h1>}
 
       <h1>Registrar Morador</h1>
-      <Formik
-        initialValues={initialState}
-        onSubmit={handleSubmitMethod}
-        validator={() => ({})} //está assim porque estamos usando validação do ant design
-      >
-        
-        {(props) => (
-          <Form 
-          onFinish={props.handleSubmit} //equivale a onSubmit
-          {...formItemLayout}
-          form={form}
-          name="register"
-          scrollToFirstError
-          >
+      <div className="register-form">
+        <Formik
+          initialValues={initialState}
+          onSubmit={handleSubmitMethod}
+          validator={() => ({})} //está assim porque estamos usando validação do ant design
+        >
+          
+          {(props) => (
+            <Form 
+            onFinish={props.handleSubmit} //equivale a onSubmit
+            {...formItemLayout}
+            form={form}
+            name="register"
+            scrollToFirstError
+            >
 
-          {/* {console.log(props.values)} */}
+            {/* {console.log(props.values)} */}
 
-          <Form.Item
-            name="fullName"
-            label="Full Name"
-            rules={[
-              // {
-              //   type: 'fullName',
-              //   message: 'The input is not valid name!',
-              // },
-              {
-                required: true,
-                message: 'Please input your name!',
-              },
-            ]}
-          >
-            <Input name="fullName" value={props.values.fullName} onChange={props.handleChange}/>
-          </Form.Item>
-
-          <Form.Item
-            name="email"
-            label="E-mail"
-            rules={[
-              // {
-              //   type: 'email',
-              //   message: 'The input is not valid E-mail!',
-              // },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input name="email" value={props.values.email} onChange={props.handleChange}/>
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password name="password" value={props.values.password} onChange={props.handleChange}/>
-          </Form.Item>
-
-          <Form.Item
-            name="confirm"
-            label="Confirm Password"
-            dependencies={['password']}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'Please confirm your password!',
-              },
-              ({ getFieldValue }) => ({
-                validator(rule, value) {
-                  if (!value || getFieldValue('password') === value) {
-                    return Promise.resolve();
-                  }
-
-                  return Promise.reject('The two passwords that you entered do not match!');
+            <Form.Item
+              name="fullName"
+              label="Full Name"
+              rules={[
+                // {
+                //   type: 'fullName',
+                //   message: 'The input is not valid name!',
+                // },
+                {
+                  required: true,
+                  message: 'Please input your name!',
                 },
-              }),
-            ]}
-          >
-            <Input.Password/>
-          </Form.Item>
+              ]}
+            >
+              <Input name="fullName" value={props.values.fullName} onChange={props.handleChange}/>
+            </Form.Item>
 
-          <Form.Item
-            name="apartment"
-            label={
-              <span>
-                Apartment
-                <Tooltip title="What is the apartment?">
-                </Tooltip>
-              </span>
-            }
-            rules={[
-              {
-                required: true,
-                message: 'Please input the apartment!',
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input name="apartment" value={props.values.apartment} onChange={props.handleChange}/>
-          </Form.Item>
+            <Form.Item
+              name="email"
+              label="E-mail"
+              rules={[
+                // {
+                //   type: 'email',
+                //   message: 'The input is not valid E-mail!',
+                // },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                },
+              ]}
+            >
+              <Input name="email" value={props.values.email} onChange={props.handleChange}/>
+            </Form.Item>
 
-          <Form.Item
-            name="phone"
-            label="Phone Number"
-            
-            rules={[
-              {
-                // required: true,
-                message: 'Please input your phone number!',
-              },
-            ]}
-          >
-            <Input
-              addonBefore={prefixSelector}
-              style={{
-                width: '100%',
-              }}
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input.Password name="password" value={props.values.password} onChange={props.handleChange}/>
+            </Form.Item>
+
+            <Form.Item
+              name="confirm"
+              label="Confirm Password"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
+
+                    return Promise.reject('The two passwords that you entered do not match!');
+                  },
+                }),
+              ]}
+            >
+              <Input.Password/>
+            </Form.Item>
+
+            <Form.Item
+              name="apartment"
+              label={
+                <span>
+                  Apartment
+                  <Tooltip title="What is the apartment?">
+                  </Tooltip>
+                </span>
+              }
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input the apartment!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input name="apartment" value={props.values.apartment} onChange={props.handleChange}/>
+            </Form.Item>
+
+            <Form.Item
               name="phone"
-              value={props.values.phone}
-              onChange={props.handleChange}
-            />
-          </Form.Item>
+              label="Phone Number"
+              
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your phone number!',
+                },
+              ]}
+            >
+              <Input
+                addonBefore={prefixSelector}
+                style={{
+                  width: '100%',
+                }}
+                name="phone"
+                value={props.values.phone}
+                onChange={props.handleChange}
+              />
+            </Form.Item>
 
-          <Form.Item {...tailFormItemLayout}>
-            <Button htmlType="submit">
-              Register
-            </Button>
-          </Form.Item>
-        </Form>
-        )}
+            <Form.Item {...tailFormItemLayout}>
+              <Button htmlType="submit">
+                Register
+              </Button>
+            </Form.Item>
+          </Form>
+          )}
 
-      </Formik>
-
-      
+        </Formik>
+      </div>
     </div>
   );
 };

@@ -45,7 +45,7 @@ class ResidentsList extends Component {
         dataIndex: 'key',
         key: 'x',
         render: (residentId) => {
-          return <button onClick={() => this.deleteResident(residentId)}>Delete</button>
+          return <Button type="primary" onClick={() => this.deleteResident(residentId)}>Delete</Button>
         },
       },
     ];
