@@ -5,18 +5,6 @@ import apiService from '../../services/api.service';
 
 import { Table, Button } from 'antd';
 
-const columns = [
-  { title: 'Nome', dataIndex: 'name', key: 'name' },
-  { title: 'Apartamento', dataIndex: 'apartment', key: 'apartment' },
-  { title: 'Email', dataIndex: 'email', key: 'email' },
-  {
-    title: '',
-    dataIndex: '',
-    key: 'x',
-    render: () => <a>Delete</a>,
-  },
-];
-
 class ResidentsList extends Component {
   state = {
     listOfResidents: [],
@@ -36,7 +24,32 @@ class ResidentsList extends Component {
     this.getAllResidents();
   }
 
+  deleteResident = async (id) => {
+    try {
+      await apiService.deleteResidentById(id);
+
+      this.getAllResidents();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   render() {
+    console.log(this.state.listOfResidents)
+    const columns = [
+      { title: 'Nome', dataIndex: 'name', key: 'name' },
+      { title: 'Apartamento', dataIndex: 'apartment', key: 'apartment' },
+      { title: 'Email', dataIndex: 'email', key: 'email' },
+      {
+        title: '',
+        dataIndex: 'key',
+        key: 'x',
+        render: (residentId) => {
+          return <button onClick={() => this.deleteResident(residentId)}>Delete</button>
+        },
+      },
+    ];
+    
     const data = this.state.listOfResidents.map( resident => {
       const objectData = 
       {
@@ -47,7 +60,7 @@ class ResidentsList extends Component {
       }
       return objectData;
     })
-    console.log(this.state.listOfResidents)
+    // console.log(this.state.listOfResidents)
 
     return(
       <div>

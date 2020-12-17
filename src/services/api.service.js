@@ -47,6 +47,10 @@ class ApiServices {
   addRoom = async data => {
     await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/rooms/private/create`, data);
   }
+
+  deleteResidentById = async id => {
+    await this.api.delete(`${process.env.REACT_APP_API_BASE_URL}/residents/private/delete/${id}`);
+  }
 }
 
 
