@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Formik } from 'formik';
 
@@ -6,17 +6,26 @@ import ApiServices from '../../services/api.service';
 
 import {
     Form,
-    Input,
     Button,
     Cascader,
+    DatePicker,
   } from 'antd';
-import apiService from '../../services/api.service';
-  
 
+  
+const config = {
+  rules: [
+    {
+      type: 'object',
+      required: true,
+      message: 'Please select time!',
+    },
+  ],
+};
 
   const AddBooking = (props) => {
     const [isCreationSucessfull, setCreationSuccessfull] = useState(false);
-
+    const [rooms, setRoom] = useState([]);
+    const [owner, setOwner] = useState();
     console.log(isCreationSucessfull)
     console.log(setCreationSuccessfull)
 
@@ -34,7 +43,11 @@ import apiService from '../../services/api.service';
       
       const handleSubmitMethod = async (data, helperMethods) => {
         try {
+          
+          //const owner = this.props.theOwner._id;
           await ApiServices.addBooking(data);
+
+          //this.props.getTheOwner();
     
           setCreationSuccessfull(true)
     
@@ -44,21 +57,57 @@ import apiService from '../../services/api.service';
         }
       }
       
-      const getRooms = async () => {
-        try{
-        const rooms = await apiService.getAllRooms();
+    const getRooms = async () => {
+      try{
+        const roomsFromDb = await ApiServices.getAllRooms();
 
+        const roomsMapped = roomsFromDb.map(room =>{
+          const theRooms = {
+            value: room.name,
+            label: room.name,
+          }
+          return theRooms;
+        })
+        console.log(roomsMapped);
+        
+        setRoom(roomsMapped);
+        return roomsMapped;
 
-        }catch(error){
-          console.log(error);
-        }
+      }catch(error){
+        console.log(error);
+    }
+  }
+  
+  useEffect(() => {   
+    return getRooms();
+  },[rooms]);
+
+const getOwner = async () => {
+  try {
+    const ownersFromDb = await ApiServices.getAllResidents();
+
+    const ownerMapped = ownersFromDb.map(ownerId =>{
+      const theOnwer = {
+        owner: ownerId._id
       }
-    
+      return theOnwer;
+    })
+    setOwner(ownerMapped);
+  }catch(error){
+    console.log(error);
+  }
+}
+
+useEffect(() => {   
+  return getOwner();
+},[owner]);
+
     return (
       <div>
         {isCreationSucessfull && <h2>Novo agendamento criado com sucesso</h2>}
 
-        <h1>Adicione uma dependencia</h1>
+        <h1>Crie um Agendamento</h1>
+        <p>Todos os agendamentos são de no máximo 1 hora, se desejar agendar mais que 1 hora, você deverá incluir mais um agendamento para a hora seguinte.</p>
         <Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}
@@ -76,37 +125,20 @@ import apiService from '../../services/api.service';
           layout="horizontal"
           onFinish={props.handleSubmit}
         >
-
-          <Form.Item 
-          name="Nome da Dependencia"
-          label="Nome da Dependencia">
-            <Input name="Nome da Dependencia" value={props.values.name} onChange={props.handleChange}/>
-          </Form.Item>
-
-          
-        <Form.Item label="Cascader">
+ 
+        <Form.Item label="Selecione uma Dependência" >
           <Cascader
-            options={[
-              {
-                render: (rooms) =>{
-                  return getRooms(rooms)//verificar como referenciar as rooms no cascader
-                },
-               // value: getRooms,
-                label: 'rooms',
-              },
-            ]}
+            options={rooms}
           />
           </Form.Item>
 
-          <Form.Item 
-          name ="Descrição"
-          label="Descrição">
-            <Input name="Descrição" value={props.values.description} onChange={props.handleChange}/>
-          </Form.Item>
+          <Form.Item name="date-time-picker" label="Selecione uma data e horário" {...config} >
+        <DatePicker showTime format="YYYY-MM-DD HH" />
+      </Form.Item>
 
           <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Agendar
         </Button>
       </Form.Item>
     
