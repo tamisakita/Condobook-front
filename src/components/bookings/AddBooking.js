@@ -3,51 +3,118 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 
 import ApiServices from '../../services/api.service';
-import { Form, Input, InputNumber, Button } from 'antd';
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
+import {
+    Form,
+    Input,
+    Button,
+    Cascader,
+  } from 'antd';
+import apiService from '../../services/api.service';
+  
 
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not a valid email!',
-    number: '${label} is not a valid number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
 
-const Demo = () => {
-  const onFinish = values => {
-    console.log(values);
-  };
+  const AddBooking = (props) => {
+    const [isCreationSucessfull, setCreationSuccessfull] = useState(false);
 
-  return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email' }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'age']} label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
-        <InputNumber />
-      </Form.Item>
-      <Form.Item name={['user', 'website']} label="Website">
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Introduction">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+    console.log(isCreationSucessfull)
+    console.log(setCreationSuccessfull)
+
+        const initialState = {
+            room: '',
+            bookingstart: '',
+            owner: '',
+        }
+    
+      const redirectToDashboard = () => {
+        setTimeout(() => {
+          props.history.push('/dashboard');
+        }, 2000)
+      }
+      
+      const handleSubmitMethod = async (data, helperMethods) => {
+        try {
+          await ApiServices.addBooking(data);
+    
+          setCreationSuccessfull(true)
+    
+          redirectToDashboard()
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      
+      const getRooms = async () => {
+        try{
+        const rooms = await apiService.getAllRooms();
+
+
+        }catch(error){
+          console.log(error);
+        }
+      }
+    
+    return (
+      <div>
+        {isCreationSucessfull && <h2>Novo agendamento criado com sucesso</h2>}
+
+        <h1>Adicione uma dependencia</h1>
+        <Formik
+            initialValues={initialState}
+            onSubmit={handleSubmitMethod}
+            validator={() => ({})}
+        >
+
+        {(props) => (
+        <Form
+          labelCol={{
+            span: 4,
+          }}
+          wrapperCol={{
+            span: 14,
+          }}
+          layout="horizontal"
+          onFinish={props.handleSubmit}
+        >
+
+          <Form.Item 
+          name="Nome da Dependencia"
+          label="Nome da Dependencia">
+            <Input name="Nome da Dependencia" value={props.values.name} onChange={props.handleChange}/>
+          </Form.Item>
+
+          
+        <Form.Item label="Cascader">
+          <Cascader
+            options={[
+              {
+                render: (rooms) =>{
+                  return getRooms(rooms)//verificar como referenciar as rooms no cascader
+                },
+               // value: getRooms,
+                label: 'rooms',
+              },
+            ]}
+          />
+          </Form.Item>
+
+          <Form.Item 
+          name ="Descrição"
+          label="Descrição">
+            <Input name="Descrição" value={props.values.description} onChange={props.handleChange}/>
+          </Form.Item>
+
+          <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
-    </Form>
-  );
-};
+    
+        </Form>
+        )}
+        </Formik>
+      </div>
+    );
+  };
+  
+  export default AddBooking
