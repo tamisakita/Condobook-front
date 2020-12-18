@@ -67,7 +67,7 @@ class Navbar extends Component {
                   <Menu.Item className="logo" key="1"><Link to={"/dashboard"}>CONDOBOOK</Link></Menu.Item>
                   <Menu.Item key="2"><Link to={`/list-residents`}>Condôminos</Link></Menu.Item>
                   <Menu.Item key="3"><Link to={"/list-room"}>Dependências</Link></Menu.Item>
-                  <Menu.Item key="4">Agendamentos</Menu.Item>
+                  <Menu.Item key="4"><Link to={"/list-booking"}>Agendamentos</Link></Menu.Item>
                   <Menu.Item key="5"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
                 </Menu>
               </Header>
