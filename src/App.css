@@ -65,3 +65,8 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
