@@ -13,31 +13,28 @@ import {
   
 
 
-  const AddRoom = (props) => {
+  const AddRoom = () => {
     const [isCreationSucessfull, setCreationSuccessfull] = useState(false);
 
     console.log(isCreationSucessfull)
     console.log(setCreationSuccessfull)
 
+    const [form] = Form.useForm();
+
         const initialState = {
             name: '',
-            capacity: '',
+            capacity: 0,
             description: '',
         }
     
-      const redirectToDashboard = () => {
-        setTimeout(() => {
-          props.history.push('/dashboard');
-        }, 2000)
-      }
       
       const handleSubmitMethod = async (data, helperMethods) => {
+        console.log(data);
         try {
           await ApiServices.addRoom(data);
     
           setCreationSuccessfull(true)
-    
-          redirectToDashboard()
+          
         } catch (error) {
           console.log(error)
         }
@@ -64,25 +61,28 @@ import {
           }}
           layout="horizontal"
           onFinish={props.handleSubmit}
+          form={form}
+          name="register"
         >
 
           <Form.Item 
-          name="Nome da Dependencia"
+          name="name"
           label="Nome da Dependencia">
-            <Input name="Nome da Dependencia" value={props.values.name} onChange={props.handleChange}/>
+            <Input name="name" value={props.values.name} onChange={props.handleChange}/>
           </Form.Item>
 
-          
+        
+
           <Form.Item 
-          name = "Capacidade"
+          name ="capacity"
           label="Capacidade de Pessoas">
-            <InputNumber name="Capacidade" value={props.values.capacity} onChange={props.handleChange} rules={[{ type: 'number', min: 0, max: 99 }]}/>
+            <Input htmlType="number" name="capacity" value={props.values.capacity} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item 
-          name ="Descrição"
+          name ="description"
           label="Descrição">
-            <Input name="Descrição" value={props.values.description} onChange={props.handleChange}/>
+            <Input name="description" value={props.values.description} onChange={props.handleChange}/>
           </Form.Item>
 
           <Form.Item>
@@ -99,3 +99,5 @@ import {
   };
   
   export default AddRoom;
+
+  //

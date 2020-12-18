@@ -5,30 +5,30 @@ import apiService from '../../services/api.service';
 
 import { Table, Button } from 'antd';
 
-class ResidentsList extends Component {
+class BookingList extends Component {
   state = {
-    listOfResidents: [],
+    listOfBookings: [],
   }
 
-  getAllResidents = async () => {
+  getAllBookings = async () => {
     try {
-      const residents = await apiService.getAllResidents();
+      const bookings = await apiService.getAllBookings();
 
-      this.setState({ listOfResidents: residents })
+      this.setState({ listOfBookings: bookings })
     } catch (error) {
       console.log(error);
     }
   }
 
   componentDidMount() {
-    this.getAllResidents();
+    this.getAllBookings();
   }
 
-  deleteResident = async (id) => {
+  deleteBookingById = async (id) => {
     try {
-      await apiService.deleteResidentById(id);
+      await apiService.deleteBookingById(id);
 
-      this.getAllResidents();
+      this.getAllBookings();
     } catch (error) {
       console.log(error);
     }
