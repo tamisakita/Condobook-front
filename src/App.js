@@ -13,6 +13,7 @@ import RoomList from './components/rooms/RoomList';
 import AddBooking from './components/bookings/AddBooking';
 
 import localStorageUtils from './utils/localStorage.utils';
+import BookingList from './components/bookings/BookingList';
 
 class App extends Component {
   constructor() {
@@ -71,6 +72,7 @@ class App extends Component {
           {isUserAuthenticated ? <Route exact path="/create-room" component={AddRoom} /> : <Redirect to="/dashboard" />}
           {isUserAuthenticated ? <Route exact path="/list-room" component={RoomList} /> : <Redirect to="/dashboard" />}
           {isUserAuthenticated ? <Route exact path="/create-booking" component={AddBooking} /> : <Redirect to="/dashboard" />}
+          {isUserAuthenticated ? <Route exact path="/list-booking" component={BookingList} /> : <Redirect to="/dashboard" />}
         </Switch>
       </div>
     );

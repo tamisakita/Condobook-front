@@ -8,7 +8,6 @@ import {
     Form,
     Input,
     Button,
-    InputNumber,
   } from 'antd';
   
 
@@ -28,7 +27,7 @@ import {
         }
     
       
-      const handleSubmitMethod = async (data, helperMethods) => {
+      const handleSubmitMethod = async (data) => {
         console.log(data);
         try {
           await ApiServices.addRoom(data);
@@ -70,8 +69,7 @@ import {
           label="Nome da Dependencia">
             <Input name="name" value={props.values.name} onChange={props.handleChange}/>
           </Form.Item>
-
-        
+ 
 
           <Form.Item 
           name ="capacity"
