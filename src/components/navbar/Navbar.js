@@ -50,8 +50,8 @@ class Navbar extends Component {
             <Layout className="layout">
               <Header>
                 <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                  <Menu.Item key="1">CONDOBOOK</Menu.Item>
+                <Menu theme="dark" mode="horizontal" >
+                  <Menu.Item className="logo" key="1">CONDOBOOK</Menu.Item>
                 </Menu>
               </Header>
             </Layout>          
@@ -63,12 +63,12 @@ class Navbar extends Component {
             <Layout className="layout">
               <Header>
                 <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                  <Menu.Item key="1"><Link to={"/dashboard"}>CONDOBOOK</Link></Menu.Item>
-                  <Menu.Item key="1"><Link to={`/list-residents`}>Condôminos</Link></Menu.Item>
-                  <Menu.Item key="1">Dependências</Menu.Item>
-                  <Menu.Item key="1">Agendamentos</Menu.Item>
-                  <Menu.Item key="1"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
+                <Menu theme="dark" mode="horizontal" >
+                  <Menu.Item className="logo" key="1"><Link to={"/dashboard"}>CONDOBOOK</Link></Menu.Item>
+                  <Menu.Item key="2"><Link to={`/list-residents`}>Condôminos</Link></Menu.Item>
+                  <Menu.Item key="3"><Link to={"/list-room"}>Dependências</Link></Menu.Item>
+                  <Menu.Item key="4">Agendamentos</Menu.Item>
+                  <Menu.Item key="5"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
                 </Menu>
               </Header>
             </Layout>      
@@ -80,15 +80,15 @@ class Navbar extends Component {
             <Layout className="layout">
                 <Header>
                   <div className="logo" />
-                  <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                  <Menu.Item key="1"><Link to={"/dashboard-resident"}>CONDOBOOK</Link></Menu.Item>
-                    <Menu.Item key="1">Meus Agendamentos</Menu.Item>
+                  <Menu theme="dark" mode="horizontal" >
+                  <Menu.Item className="logo" key="1"><Link to={"/dashboard-resident"}>CONDOBOOK</Link></Menu.Item>
+                    <Menu.Item key="2"><Link to="/create-booking">Meus Agendamentos</Link></Menu.Item>
                     <Dropdown overlay={menu}>
                       <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         Dependências <DownOutlined />
                       </a>
                     </Dropdown>
-                    <Menu.Item key="1"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
+                    <Menu.Item key="3"><Link to="/login" onClick={this.props.logoutUser}>Logout</Link></Menu.Item>
                   </Menu>
                 </Header>
               </Layout>     
