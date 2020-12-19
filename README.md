@@ -7,7 +7,6 @@ Condobook is an application made for building administrators and condo residents
 
 On Condoobok, building admins are able to register residents, common rooms and set ideal capacity plus include details about each rooms use.
 Residents can book common spaces knowing they will avoid crowding and 
-
 ## Getting Started
 Log in with the following:
 
@@ -20,7 +19,10 @@ No hardware prerequisites needed.
 ## Platform Features
 ### Log in
 ![alt text](https://github.com/tamisakita/Condobook-front/blob/master/Log%20in.png "Log in")
-
+### Administrator screen
+![alt text](https://github.com/tamisakita/Condobook-front/blob/master/administrator.png "Administrator screen")
+### Resident screen
+![alt text](https://github.com/tamisakita/Condobook-front/blob/master/resident.png "Resident screen")
 ## Coding Improvements
 * CSS improvements
 * Update feature for all the main inputs
