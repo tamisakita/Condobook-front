@@ -43,16 +43,18 @@ render() {
     { title: 'Descrição', dataIndex: 'description', key: 'description' },
     {
       title: '',
-      dataIndex: '',
+      dataIndex: 'key',
       key: 'x',
       render: (roomId) => {
-        return <button onClick={() => this.deleteRoom(roomId)}>Delete</button>
+        console.log(roomId)
+        return <Button type="primary" onClick={() => this.deleteRoom(roomId)}>Delete</Button>
       }
     },
   ];
 
     const data = this.state.listOfRooms.map( rooms => {
         const dataObject = {
+            key: rooms._id,
             name: rooms.name,
             capacity: rooms.capacity,
             description: rooms.description,
@@ -75,7 +77,7 @@ render() {
     />
     <Link to={`/create-room`}>
     <Button type="primary" block>
-    Criar novo Agendamento 
+    Criar nova Dependência
     </Button>
     </Link>
   </div>
