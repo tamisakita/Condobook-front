@@ -231,7 +231,7 @@ const AddResidents = (props) => {
 
             <Form.Item {...tailFormItemLayout}>
               <Button htmlType="submit">
-                Register
+                Enviar
               </Button>
             </Form.Item>
           </Form>
