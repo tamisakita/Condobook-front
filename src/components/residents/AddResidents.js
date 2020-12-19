@@ -11,7 +11,6 @@ import {
   Select,
   Button,
 } from 'antd';
-// import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 

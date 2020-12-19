@@ -62,11 +62,25 @@ h1 {
 }
 
 .register-form {
-  display: flex;
-  justify-content: center;
+  display: block;
+  padding-right: 250px;
+}
+
+.room-form {
+  display: block;
+  padding-left: 250px;
 }
 
 .logo {
   font-weight: bold;
   font-size: 20px;
 }
+
+.text-booking {
+  text-align: center;
+  padding: 0px 350px
+}
+/* 
+.form-add-booking {
+  margin-left: 500px;
+} */
