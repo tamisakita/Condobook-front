@@ -71,6 +71,9 @@ class ApiServices {
 
     return data;
   }
+  deleteBookingById= async id => {
+    await this.api.delete(`${process.env.REACT_APP_API_BASE_URL}/booking/private/delete/${id}`);
+  }
 }
 
 
