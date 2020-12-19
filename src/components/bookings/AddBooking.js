@@ -80,7 +80,7 @@ const config = {
         {isCreationSucessfull && <h2>Novo agendamento criado com sucesso</h2>}
 
         <h1>Crie um Agendamento</h1>
-        <p>Todos os agendamentos são de no máximo 1 hora, se desejar agendar mais que 1 hora, você deverá incluir mais um agendamento para a hora seguinte.</p>
+        <p className="text-booking" >Todos os agendamentos são de no máximo 1 hora, se desejar agendar mais que 1 hora, você deverá incluir mais um agendamento para a hora seguinte.</p>
         {rooms.length>0 &&(<Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}
@@ -88,6 +88,7 @@ const config = {
         >
 
         {(props) => (
+        <div className="form-add-booking">
         <Form
           labelCol={{
             span: 4,
@@ -117,6 +118,7 @@ const config = {
       </Form.Item>
     
         </Form>
+        </div>
         )}
         </Formik>)}
       </div>

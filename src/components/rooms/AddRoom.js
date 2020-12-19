@@ -44,7 +44,7 @@ import {
         {isCreationSucessfull && <h2>Cadastro da dependencia realizado com sucesso</h2>}
 
         <h1>Adicione uma dependencia</h1>
-        <div className="register-form">
+        <div className="room-form">
         <Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}
@@ -86,7 +86,7 @@ import {
 
           <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Enviar
         </Button>
       </Form.Item>
     
