@@ -12,8 +12,9 @@ class BookingList extends Component {
 
   getAllBookings = async () => {
     try {
-      const bookings = await apiService.getAllBookings();
-
+    const { params } = this.props.match;
+    const bookings = await apiService.getAllBookings(params.ownerId);
+         console.log(bookings);
       this.setState({ listOfBookings: bookings })
     } catch (error) {
       console.log(error);
@@ -35,28 +36,26 @@ class BookingList extends Component {
   }
 
   render() {
-    console.log(this.state.listOfResidents)
+    console.log(this.state.listOfBookings)
     const columns = [
-      { title: 'Nome', dataIndex: 'name', key: 'name' },
-      { title: 'Apartamento', dataIndex: 'apartment', key: 'apartment' },
-      { title: 'Email', dataIndex: 'email', key: 'email' },
+      { title: 'Dependência', dataIndex: 'room', key: 'room' },
+      { title: 'Data e Horário', dataIndex: 'bookingstar', key: 'bookingstar' },
       {
         title: '',
         dataIndex: 'key',
         key: 'x',
-        render: (residentId) => {
-          return <Button type="primary" onClick={() => this.deleteResident(residentId)}>Delete</Button>
+        render: (bookingId) => {
+          return <Button type="primary" onClick={() => this.deleteResident(bookingId)}>Delete</Button>
         },
       },
     ];
     
-    const data = this.state.listOfResidents.map( resident => {
+    const data = this.state.listOfBookings.map( booking => {
       const objectData = 
       {
-        key: resident._id,
-        name: resident.fullName,
-        apartment: resident.apartment,
-        email: resident.email,
+        key: booking._id,
+        room: booking.room,
+        bookingstart: booking.bookingstart,
       }
       return objectData;
     })
@@ -64,7 +63,7 @@ class BookingList extends Component {
 
     return(
       <div>
-        <h1>Lista dos condôminos</h1>
+        <h1>Lista dos Agendamentos</h1>
         <Table
         columns={columns}
         expandable={{
@@ -73,9 +72,9 @@ class BookingList extends Component {
         }}
         dataSource={data}
         />
-        <Link to={`/register`}>
+        <Link to={`/create-booking`}>
         <Button type="primary" block>
-        Registrar novo morador
+        Fazer novo Agendamento
         </Button>
         </Link>
       </div>
@@ -83,4 +82,4 @@ class BookingList extends Component {
   }
 }
 
-export default ResidentsList;
+export default BookingList;

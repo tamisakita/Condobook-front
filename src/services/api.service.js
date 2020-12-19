@@ -62,8 +62,14 @@ class ApiServices {
     await this.api.delete(`${process.env.REACT_APP_API_BASE_URL}/rooms/private/delete/${id}`);
   }
 
-  addBookings = async data => {
-    await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/booking/private/createbooking`, data);
+  addBookings = async (data) => {
+    await this.api.post(`${process.env.REACT_APP_API_BASE_URL}/booking/private/create`, data);
+  }
+
+  getAllBookings = async () => {
+    const { data } = await this.api.get(`${process.env.REACT_APP_API_BASE_URL}/booking/private/bookingslist`);
+
+    return data;
   }
 }
 

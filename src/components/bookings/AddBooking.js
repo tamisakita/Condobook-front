@@ -7,9 +7,11 @@ import ApiServices from '../../services/api.service';
 import {
     Form,
     Button,
-    Cascader,
+    Select,
     DatePicker,
   } from 'antd';
+
+  const { Option } = Select;
 
   
 const config = {
@@ -25,33 +27,25 @@ const config = {
   const AddBooking = (props) => {
     const [isCreationSucessfull, setCreationSuccessfull] = useState(false);
     const [rooms, setRoom] = useState([]);
-    const [owner, setOwner] = useState();
+
     console.log(isCreationSucessfull)
     console.log(setCreationSuccessfull)
 
-        const initialState = {
-            room: '',
-            bookingstart: '',
-            owner: '',
+        const initialState = 
+         {
+          room: "", 
+          bookingstart: "",
         }
     
-      const redirectToDashboard = () => {
-        setTimeout(() => {
-          props.history.push('/dashboard');
-        }, 2000)
-      }
       
-      const handleSubmitMethod = async (data, helperMethods) => {
+      const handleSubmitMethod = async (data) => {
+        console.log(data)
         try {
-          
-          //const owner = this.props.theOwner._id;
-          await ApiServices.addBooking(data);
-
-          //this.props.getTheOwner();
+      
+          //await ApiServices.addBookings(newIformation);
     
           setCreationSuccessfull(true)
     
-          redirectToDashboard()
         } catch (error) {
           console.log(error)
         }
@@ -80,27 +74,8 @@ const config = {
   
   useEffect(() => {   
     return getRooms();
-  },[rooms]);
+  },[]);
 
-const getOwner = async () => {
-  try {
-    const ownersFromDb = await ApiServices.getAllResidents();
-
-    const ownerMapped = ownersFromDb.map(ownerId =>{
-      const theOnwer = {
-        owner: ownerId._id
-      }
-      return theOnwer;
-    })
-    setOwner(ownerMapped);
-  }catch(error){
-    console.log(error);
-  }
-}
-
-useEffect(() => {   
-  return getOwner();
-},[owner]);
 
     return (
       <div>
@@ -108,7 +83,7 @@ useEffect(() => {
 
         <h1>Crie um Agendamento</h1>
         <p>Todos os agendamentos são de no máximo 1 hora, se desejar agendar mais que 1 hora, você deverá incluir mais um agendamento para a hora seguinte.</p>
-        <Formik
+        {rooms.length>0 &&(<Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}
             validator={() => ({})}
@@ -126,14 +101,15 @@ useEffect(() => {
           onFinish={props.handleSubmit}
         >
  
-        <Form.Item label="Selecione uma Dependência" >
-          <Cascader
-            options={rooms}
-          />
-          </Form.Item>
+        {/* <Form.Item label="Selecione uma Dependência" name="room" value = {props.values.room} onChange={props.handleChange} > */}
+        <Select defaultValue="" style={{ width: 120 }} onChange={props.handleChange}>
+        {console.log(rooms)}
+          {rooms.map((room)=><Option key={room.name} value={room.name}>{room.name}</Option>)}
+        </Select>
+       {/*  </Form.Item> */}
 
-          <Form.Item name="date-time-picker" label="Selecione uma data e horário" {...config} >
-        <DatePicker showTime format="YYYY-MM-DD HH" />
+          <Form.Item name="bookingstart" label="Selecione uma data e horário"  {...config} >
+        <DatePicker value={props.values.bookingstart} onChange={(_,dateString)=>props.setFieldValue("bookingstart",dateString)} showTime format="YYYY-MM-DD HH"/>
       </Form.Item>
 
           <Form.Item>
@@ -144,9 +120,9 @@ useEffect(() => {
     
         </Form>
         )}
-        </Formik>
+        </Formik>)}
       </div>
     );
   };
   
-  export default AddBooking
+  export default AddBooking;
