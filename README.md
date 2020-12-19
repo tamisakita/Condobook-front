@@ -19,7 +19,7 @@ Link to run the web app in your browser => [Link](https://5fdd582ad3466c2982ab31
 No hardware prerequisites needed.
 ## Platform Features
 ### Log in
-![alt text](https://https://github.com/tamisakita/Condobook-front/blob/master/Log%20in.png "Log in")
+![alt text](https://github.com/tamisakita/Condobook-front/blob/master/Log%20in.png "Log in")
 
 ## Coding Improvements
 * CSS improvements
