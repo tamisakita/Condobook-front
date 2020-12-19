@@ -68,11 +68,11 @@ class App extends Component {
           {isUserAuthenticated ? <Route exact path="/register" component={AddResidents} /> : <Redirect to="/login" />}
           {isUserAuthenticated ? <Route exact path="/dashboard" component={Dashboard} /> : <Redirect to="/login" />}
           {isUserAuthenticated ? <Route exact path="/dashboard-resident" component={DashboardResident} /> : <Redirect to="/login" />}
-          {isUserAuthenticated ? <Route exact path="/list-residents" component={ResidentsList} /> : <Redirect to="/dashboard" />}
-          {isUserAuthenticated ? <Route exact path="/create-room" component={AddRoom} /> : <Redirect to="/dashboard" />}
-          {isUserAuthenticated ? <Route exact path="/list-room" component={RoomList} /> : <Redirect to="/dashboard" />}
-          {isUserAuthenticated ? <Route exact path="/create-booking" component={AddBooking} /> : <Redirect to="/dashboard" />}
-          {isUserAuthenticated ? <Route exact path="/list-booking" component={BookingList} /> : <Redirect to="/dashboard" />}
+          {isUserAuthenticated ? <Route exact path="/list-residents" component={ResidentsList} /> : <Redirect to="/login" />}
+          {isUserAuthenticated ? <Route exact path="/create-room" component={AddRoom} /> : <Redirect to="/login" />}
+          {isUserAuthenticated ? <Route exact path="/list-room" component={RoomList} /> : <Redirect to="/login" />}
+          {isUserAuthenticated ? <Route exact path="/create-booking" component={AddBooking} /> : <Redirect to="/login" />}
+          {isUserAuthenticated ? <Route exact path="/list-booking" component={BookingList} /> : <Redirect to="/login" />}
         </Switch>
       </div>
     );

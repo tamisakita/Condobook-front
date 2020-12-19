@@ -58,7 +58,7 @@ class ApiServices {
     return data;
   }
 
-  deleteRoomById = async id => {
+  deleteRoombyId = async id => {
     await this.api.delete(`${process.env.REACT_APP_API_BASE_URL}/rooms/private/delete/${id}`);
   }
 
