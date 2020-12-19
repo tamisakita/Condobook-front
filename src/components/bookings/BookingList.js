@@ -12,8 +12,7 @@ class BookingList extends Component {
 
   getAllBookings = async () => {
     try {
-    const { params } = this.props.match;
-    const bookings = await apiService.getAllBookings(params.ownerId);
+    const bookings = await apiService.getAllBookings();
          console.log(bookings);
       this.setState({ listOfBookings: bookings })
     } catch (error) {
@@ -26,6 +25,7 @@ class BookingList extends Component {
   }
 
   deleteBookingById = async (id) => {
+    console.log(id)
     try {
       await apiService.deleteBookingById(id);
 
@@ -39,13 +39,13 @@ class BookingList extends Component {
     console.log(this.state.listOfBookings)
     const columns = [
       { title: 'Dependência', dataIndex: 'room', key: 'room' },
-      { title: 'Data e Horário', dataIndex: 'bookingstar', key: 'bookingstar' },
+      { title: 'Data e Horário', dataIndex: 'bookingstart', key: 'bookingstart' },
       {
         title: '',
         dataIndex: 'key',
         key: 'x',
         render: (bookingId) => {
-          return <Button type="primary" onClick={() => this.deleteResident(bookingId)}>Delete</Button>
+          return <Button type="primary" onClick={() => this.deleteBookingById(bookingId)}>Delete</Button>
         },
       },
     ];

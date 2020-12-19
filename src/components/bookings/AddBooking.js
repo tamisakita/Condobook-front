@@ -39,10 +39,8 @@ const config = {
     
       
       const handleSubmitMethod = async (data) => {
-        console.log(data)
         try {
-      
-          //await ApiServices.addBookings(newIformation);
+          await ApiServices.addBookings(data);
     
           setCreationSuccessfull(true)
     
@@ -101,15 +99,15 @@ const config = {
           onFinish={props.handleSubmit}
         >
  
-        {/* <Form.Item label="Selecione uma Dependência" name="room" value = {props.values.room} onChange={props.handleChange} > */}
-        <Select defaultValue="" style={{ width: 120 }} onChange={props.handleChange}>
+        <Form.Item label="Selecione uma Dependência" name="room"  >
+        <Select name="room" defaultValue="" style={{ width: 120 }} onChange={(value) => props.setFieldValue("room", value)}>
         {console.log(rooms)}
-          {rooms.map((room)=><Option key={room.name} value={room.name}>{room.name}</Option>)}
+          {rooms.map((room)=><Option key={room.value} value={room.value}>{room.value}</Option>)}
         </Select>
-       {/*  </Form.Item> */}
+        </Form.Item>
 
           <Form.Item name="bookingstart" label="Selecione uma data e horário"  {...config} >
-        <DatePicker value={props.values.bookingstart} onChange={(_,dateString)=>props.setFieldValue("bookingstart",dateString)} showTime format="YYYY-MM-DD HH"/>
+        <DatePicker value={props.values.bookingstart} onChange={(_,dateString)=>props.setFieldValue("bookingstart",dateString)} showTime format="YYYY-MM-DD"/>
       </Form.Item>
 
           <Form.Item>
