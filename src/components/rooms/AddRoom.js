@@ -45,6 +45,7 @@ import {
         {isCreationSucessfull && <h2>Cadastro da dependencia realizado com sucesso</h2>}
 
         <h1>Adicione uma dependencia</h1>
+        <div className="register-form">
         <Formik
             initialValues={initialState}
             onSubmit={handleSubmitMethod}
@@ -94,6 +95,7 @@ import {
         </Form>
         )}
         </Formik>
+        </div>
       </div>
     );
   };
